@@ -29,11 +29,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import com.agb.compose_movieapp.R
 import com.agb.compose_movieapp.presentation.navigation.Screens
 import com.agb.compose_movieapp.ui.theme.AppPreviewWrapper
 import com.agb.compose_movieapp.ui.theme.ThemePreviews
@@ -64,7 +66,7 @@ fun SettingScreen(modifier: Modifier = Modifier, changeLanguage: () -> Unit) {
         ) {
 
             Text(
-                "Settings",
+                stringResource(R.string.setting),
                 style = MaterialTheme.typography.headlineSmall.copy(
                     fontWeight = FontWeight.Bold,
                 ),
@@ -72,8 +74,12 @@ fun SettingScreen(modifier: Modifier = Modifier, changeLanguage: () -> Unit) {
 
             // Settings options
             Column {
-                SettingsItem(Icons.Default.Person, "Profile", onClick = {})
-                SettingsItem(Icons.Default.Edit, "Change Language", onClick = changeLanguage)
+                SettingsItem(Icons.Default.Person, stringResource(R.string.setting), onClick = {})
+                SettingsItem(
+                    Icons.Default.Edit,
+                    stringResource(R.string.change_language),
+                    onClick = changeLanguage
+                )
             }
 
 

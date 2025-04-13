@@ -2,6 +2,7 @@ package com.agb.compose_movieapp.presentation.navigation
 
 import android.util.Log
 import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -23,6 +24,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -80,14 +82,14 @@ fun ButtonNavigation(modifier: Modifier = Modifier, navController: NavController
                 },
                 label = {
                     Text(
-                        text = item.label,
+                        text = stringResource(item.label),
                         color = MaterialTheme.colorScheme.primary,
                     )
                 },
                 icon = {
                     Icon(
                         painterResource(id = item.icon),
-                        contentDescription = item.label,
+                        contentDescription = "${item.label}",
                         tint = MaterialTheme.colorScheme.primary,
                         modifier = Modifier
                             .width(46.dp)
@@ -111,10 +113,20 @@ fun ButtonNavigation(modifier: Modifier = Modifier, navController: NavController
     }
 }
 
-sealed class BottomNavItem(val label: String, @DrawableRes val icon: Int, val screen: Screens) {
-    object Discover : BottomNavItem("Discover", R.drawable.baseline_explore, Screens.DiscoverScreen)
-    object Favorite :
-        BottomNavItem("Favorite", R.drawable.baseline_favorite, Screens.FavoriteScreen)
+sealed class BottomNavItem(
+    @StringRes val label: Int,
+    @DrawableRes val icon: Int,
+    val screen: Screens
+) {
+    object Discover : BottomNavItem(
+        R.string.discover,
+        R.drawable.baseline_explore,
+        Screens.DiscoverScreen
+    )
 
-    object Setting : BottomNavItem("Setting", R.drawable.baseline_settings, Screens.SettingScreen)
+    object Favorite :
+        BottomNavItem(R.string.favorite, R.drawable.baseline_favorite, Screens.FavoriteScreen)
+
+    object Setting :
+        BottomNavItem(R.string.setting, R.drawable.baseline_settings, Screens.SettingScreen)
 }

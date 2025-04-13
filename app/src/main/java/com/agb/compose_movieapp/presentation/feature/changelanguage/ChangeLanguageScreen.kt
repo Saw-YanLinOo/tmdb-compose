@@ -1,5 +1,12 @@
 package com.agb.compose_movieapp.presentation.feature.changelanguage
 
+import android.app.Activity
+import android.app.LocaleManager
+import android.content.Context
+import android.content.ContextWrapper
+import android.os.Build
+import android.os.LocaleList
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -25,13 +32,18 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.os.LocaleListCompat
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
@@ -57,11 +69,18 @@ fun NavGraphBuilder.changeLanguageScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ChangeLanguageScreen(modifier: Modifier = Modifier, popUp: () -> Unit) {
+
+    val context = LocalContext.current
+    val deviceLocale = context.resources.configuration.locales.get(0)
+
+    var currentLocale = remember { mutableStateOf(deviceLocale.toLanguageTag()) }
+
+
     Scaffold(
         modifier = modifier,
         topBar = {
             TopAppBar(
-                title = { Text("Change Language") },
+                title = { Text(stringResource(R.string.change_language)) },
                 navigationIcon = {
                     IconButton(onClick = popUp) {
                         Icon(
@@ -86,28 +105,54 @@ fun ChangeLanguageScreen(modifier: Modifier = Modifier, popUp: () -> Unit) {
             // English option
             LanguageOption(
                 flagResource = R.drawable.ic_launcher_background,
-                languageName = "English",
-                isSelected = true
+                languageName = stringResource(R.string.english),
+                isSelected = currentLocale.value == "en",
+                onClick = {
+                    currentLocale.value = "en"
+                    localeSelection(context, currentLocale.value)
+                }
             )
 
             // Myanmar option
             LanguageOption(
                 flagResource = R.drawable.ic_launcher_background,
-                languageName = "မြန်မာဘာသာ",
-                isSelected = false
+                languageName = stringResource(R.string.myanmar),
+                isSelected = currentLocale.value == "my",
+                onClick = {
+                    currentLocale.value = "my"
+                    localeSelection(context, currentLocale.value)
+                }
             )
         }
     }
+}
+
+fun localeSelection(context: Context, localeTag: String) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        context.getSystemService(LocaleManager::class.java).applicationLocales =
+            LocaleList.forLanguageTags(localeTag)
+    } else {
+        AppCompatDelegate.setApplicationLocales(
+            LocaleListCompat.forLanguageTags(localeTag)
+        )
+    }
+}
+
+fun Context.findActivity(): Activity? = when (this) {
+    is Activity -> this
+    is ContextWrapper -> baseContext.findActivity()
+    else -> null
 }
 
 @Composable
 fun LanguageOption(
     flagResource: Int,
     languageName: String,
-    isSelected: Boolean
+    isSelected: Boolean,
+    onClick: () -> Unit,
 ) {
     Card(
-        onClick = { /* Handle language selection */ },
+        onClick = onClick,
         modifier = Modifier
             .fillMaxWidth(),
         shape = RoundedCornerShape(12.dp),

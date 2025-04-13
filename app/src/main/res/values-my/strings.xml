@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">compose-movieapp</string>
+    <string name="welcome">ကြိုဆိုပါတယ်,</string>
+    <string name="discover">ရှာဖွေမည်</string>
+    <string name="favorite">အကြိုက်ဆုံး</string>
+    <string name="setting">ဆက်တင်</string>
+    <string name="change_language">ဘာသာစကားပြောင်းမည်</string>
+    <string name="english">အင်္ဂလိပ်စာ</string>
+    <string name="myanmar">မြန်မာစာ</string>
+    <string name="chinese">တရုတ်စာ</string>
+    <string name="profile">ပရိုဖိုင်</string>
+    <string name="notification">အသိပေးချက်</string>
+</resources>

@@ -19,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -56,9 +57,9 @@ fun DiscoverScreen(modifier: Modifier = Modifier) {
         val bottom = LocalEntryPadding.current.calculateBottomPadding()
 
         LazyColumn(
-            contentPadding = PaddingValues(top=20.dp, bottom = bottom),
+            contentPadding = PaddingValues(top = 20.dp, bottom = bottom),
             modifier = Modifier
-                .padding(top=top)
+                .padding(top = top)
         ) {
             headerSection()
         }
@@ -68,7 +69,7 @@ fun DiscoverScreen(modifier: Modifier = Modifier) {
 private fun LazyListScope.headerSection() {
     item {
         Text(
-            text = "Welcome,",
+            text = stringResource(R.string.welcome),
             style = MaterialTheme.typography.headlineMedium.copy(
                 fontWeight = FontWeight.Bold,
             ),

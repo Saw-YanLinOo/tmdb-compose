@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">compose-movieapp</string>
+    <string name="welcome">欢迎,</string>
+    <string name="discover">发现</string>
+    <string name="favorite">最喜欢的</string>
+    <string name="setting">环境</string>
+    <string name="change_language">更改语言</string>
+    <string name="english">英语</string>
+    <string name="myanmar">缅甸</string>
+    <string name="chinese">中国人</string>
+    <string name="profile">轮廓</string>
+    <string name="notification">通知</string>
+</resources>
