@@ -1,24 +1,25 @@
 package com.agb.compose_movieapp.ui.theme
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.material3.Typography
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.agb.compose_movieapp.R
 
-private val interFamily = FontFamily(
-    Font(R.font.inter, FontWeight.Normal),
-    Font(R.font.inter, FontWeight.Medium),
-    Font(R.font.inter, FontWeight.Bold)
-)
+private val interFamily = FontFamily(Font(R.font.inter))
 
-private val robotoFamily = FontFamily(
-    Font(R.font.roboto, FontWeight.Normal),
-    Font(R.font.roboto, FontWeight.Medium),
-    Font(R.font.roboto, FontWeight.Bold)
-)
+private val robotoFamily = FontFamily(Font(R.font.roboto))
 
 val AppTypography = Typography(
     displayLarge = TextStyle(
@@ -128,29 +129,77 @@ val AppTypography = Typography(
     )
 )
 
-// Set of Material typography styles to start with
-val Typography = Typography(
-    bodyLarge = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 16.sp,
-        lineHeight = 24.sp,
-        letterSpacing = 0.5.sp
-    )
-    /* Other default text styles to override
-    titleLarge = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 22.sp,
-        lineHeight = 28.sp,
-        letterSpacing = 0.sp
-    ),
-    labelSmall = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Medium,
-        fontSize = 11.sp,
-        lineHeight = 16.sp,
-        letterSpacing = 0.5.sp
-    )
-    */
-)
+@Preview
+@Composable
+private fun TypographyPreview() {
+    AppPreviewWrapper {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Text(
+                text = "displayLarge",
+                style = MaterialTheme.typography.displayLarge
+            )
+            Text(
+                text = "displayMedium",
+                style = MaterialTheme.typography.displayMedium
+            )
+            Text(
+                text = "displaySmall",
+                style = MaterialTheme.typography.displaySmall
+            )
+            Text(
+                text = "headlineLarge",
+                style = MaterialTheme.typography.headlineLarge
+            )
+            Text(
+                text = "headlineMedium",
+                style = MaterialTheme.typography.headlineMedium,
+            )
+            Text(
+                text = "headlineSmall",
+                style = MaterialTheme.typography.headlineSmall
+            )
+
+            Text(
+                text = "titleLarge",
+                style = MaterialTheme.typography.titleLarge
+            )
+            Text(
+                text = "titleMedium",
+                style = MaterialTheme.typography.titleMedium
+            )
+            Text(
+                text = "titleSmall",
+                style = MaterialTheme.typography.titleSmall
+            )
+
+            Text(
+                text = "labelLarge",
+                style = MaterialTheme.typography.labelLarge
+            )
+            Text(
+                text = "labelMedium",
+                style = MaterialTheme.typography.labelMedium
+            )
+            Text(
+                text = "labelSmall",
+                style = MaterialTheme.typography.labelSmall
+            )
+            Text(
+                text = "bodyLarge",
+                style = MaterialTheme.typography.bodyLarge
+            )
+            Text(
+                text = "bodyMedium",
+                style = MaterialTheme.typography.bodyMedium
+            )
+            Text(
+                text = "bodySmall",
+                style = MaterialTheme.typography.bodySmall
+            )
+        }
+    }
+}

@@ -1,5 +1,6 @@
 package com.agb.compose_movieapp.presentation.feature.discover
 
+import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -21,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
@@ -29,7 +31,7 @@ import com.agb.compose_movieapp.R
 import com.agb.compose_movieapp.presentation.navigation.Screens
 import com.agb.compose_movieapp.ui.theme.AppPreviewWrapper
 import com.agb.compose_movieapp.ui.theme.LocalEntryPadding
-import com.agb.compose_movieapp.ui.theme.ThemePreviews
+import com.agb.compose_movieapp.ui.theme.MyanmarLightThemePreview
 
 
 fun NavGraphBuilder.discoverScreen(
@@ -70,9 +72,7 @@ private fun LazyListScope.headerSection() {
     item {
         Text(
             text = stringResource(R.string.welcome),
-            style = MaterialTheme.typography.headlineMedium.copy(
-                fontWeight = FontWeight.Bold,
-            ),
+            style = MaterialTheme.typography.headlineMedium,
             fontWeight = FontWeight.Bold,
             modifier = Modifier
                 .padding(horizontal = 20.dp)
@@ -125,7 +125,7 @@ private fun LazyListScope.searchBarSection(
 
 }
 
-@ThemePreviews
+@MyanmarLightThemePreview
 @Composable
 internal fun DiscoverContentPreview() {
     AppPreviewWrapper {

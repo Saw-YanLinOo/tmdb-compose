@@ -66,11 +66,26 @@ fun ComposemovieappTheme(
         content = content
     )
 }
+//
+//@Preview(uiMode = Configuration.UI_MODE_NIGHT_NO, name = "Light theme")
+//@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, name = "Dark theme")
+//annotation class ThemePreviews
+//
+//@Preview(name = "English", locale = "en")
+//@Preview(name = "Myanmar", locale = "my")
+//@Preview(name = "Chinese", locale = "zh")
+//annotation class LocalePreviews
 
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_NO, name = "Light theme")
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, name = "Dark theme")
-annotation class ThemePreviews
 
+@Preview(
+    uiMode = Configuration.UI_MODE_NIGHT_NO, name = "Light theme - Myanmar", locale = "my"
+)
+annotation class MyanmarLightThemePreview
+
+@Preview(
+    uiMode = Configuration.UI_MODE_NIGHT_NO, name = "Light theme - English", locale = "en"
+)
+annotation class EnglishLightThemePreview
 
 @Composable
 fun AppPreviewWrapper(

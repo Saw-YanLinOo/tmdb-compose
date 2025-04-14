@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.LocaleManager
 import android.content.Context
 import android.content.ContextWrapper
+import android.content.res.Configuration
 import android.os.Build
 import android.os.LocaleList
 import androidx.appcompat.app.AppCompatDelegate
@@ -41,6 +42,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.os.LocaleListCompat
@@ -50,7 +52,6 @@ import androidx.navigation.compose.composable
 import com.agb.compose_movieapp.R
 import com.agb.compose_movieapp.presentation.navigation.Screens
 import com.agb.compose_movieapp.ui.theme.AppPreviewWrapper
-import com.agb.compose_movieapp.ui.theme.ThemePreviews
 
 fun NavGraphBuilder.changeLanguageScreen(
     modifier: Modifier,
@@ -186,7 +187,7 @@ fun LanguageOption(
     }
 }
 
-@ThemePreviews
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_NO, name = "Light theme - Myanmar", locale = "my")
 @Composable
 internal fun ChangeLanguageScreenPreview() {
     AppPreviewWrapper {

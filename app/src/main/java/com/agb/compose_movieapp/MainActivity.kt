@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         setContent {
             ComposemovieappTheme {
 
-                val navController = rememberNavController();
+                val navController = rememberNavController()
 
                 SetUpNavGraph(
                     modifier = Modifier.fillMaxSize(),
