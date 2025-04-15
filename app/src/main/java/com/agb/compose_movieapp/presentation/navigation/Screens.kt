@@ -21,4 +21,7 @@ sealed class Screens() {
 
     @Serializable
     object ChangeLanguageScreen : Screens()
+
+    @Serializable
+    data class MovieDetailScreen(val id: String) : Screens()
 }

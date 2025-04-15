@@ -18,27 +18,18 @@ import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 
-private val DarkColorScheme = darkColorScheme(
-    primary = colorPrimary,
-    secondary = colorSecondary,
-    tertiary = colorTertiary,
-    background = colorBackground,
+private val LightColorScheme = lightColorScheme(
+    primary = lightColorPrimary,
+    secondary = lightColorSecondary,
+    tertiary = lightColorTertiary,
+    background = lightColorBackground,
 )
 
-private val LightColorScheme = lightColorScheme(
-    primary = colorPrimary,
-    secondary = colorSecondary,
-    tertiary = colorTertiary,
-    background = colorBackground,
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
+private val DarkColorScheme = darkColorScheme(
+    primary = darkColorPrimary,
+    secondary = darkColorSecondary,
+    tertiary = darkColorTertiary,
+    background = darkColorBackground,
 )
 
 @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.S)

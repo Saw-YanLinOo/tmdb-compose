@@ -24,10 +24,12 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
@@ -113,13 +115,16 @@ fun SettingScreen(modifier: Modifier = Modifier, changeLanguage: () -> Unit) {
 @Composable
 fun SettingsItem(icon: ImageVector, title: String, onClick: () -> Unit) {
     Card(
-
         shape = RoundedCornerShape(12.dp),
-        elevation = CardDefaults.cardElevation(4.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background),
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 6.dp)
+            .shadow(
+                elevation = 6.dp,
+                shape = RoundedCornerShape(12.dp),
+                spotColor = MaterialTheme.colorScheme.secondary,
+            )
             .clickable {
                 onClick()
             }
@@ -133,7 +138,7 @@ fun SettingsItem(icon: ImageVector, title: String, onClick: () -> Unit) {
             Icon(
                 imageVector = icon,
                 contentDescription = title,
-                tint = Color(0xFF3955BC), // Soft blue
+                tint = MaterialTheme.colorScheme.tertiary,
                 modifier = Modifier.size(24.dp)
             )
 

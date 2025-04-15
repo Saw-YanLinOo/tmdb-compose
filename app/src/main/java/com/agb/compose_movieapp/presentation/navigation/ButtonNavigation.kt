@@ -29,8 +29,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.agb.compose_movieapp.R
-import com.agb.compose_movieapp.ui.theme.colorPrimary
-import com.agb.compose_movieapp.ui.theme.colorSecondary
 
 @Composable
 fun ButtonNavigation(modifier: Modifier = Modifier, navController: NavController) {
@@ -56,12 +54,12 @@ fun ButtonNavigation(modifier: Modifier = Modifier, navController: NavController
     Log.d("CurrentRoute", "ButtonNavigation: $currentRoute")
 
     BottomAppBar(
-        containerColor = MaterialTheme.colorScheme.secondary,
+        containerColor = MaterialTheme.colorScheme.background,
         modifier = Modifier
             .fillMaxWidth()
             .shadow(
                 elevation = 12.dp,
-                spotColor = MaterialTheme.colorScheme.secondary,
+                spotColor = MaterialTheme.colorScheme.background,
             )
             .height(86.dp),
     ) {
@@ -95,7 +93,7 @@ fun ButtonNavigation(modifier: Modifier = Modifier, navController: NavController
                             .width(46.dp)
                             .clip(RoundedCornerShape(16.dp))
                             .background(
-                                if (selectedBottomNavItemIndex == index) MaterialTheme.colorScheme.background.copy(
+                                if (selectedBottomNavItemIndex == index) MaterialTheme.colorScheme.secondary.copy(
                                     alpha = 0.4f
                                 ) else Color.Transparent
                             )
@@ -105,9 +103,10 @@ fun ButtonNavigation(modifier: Modifier = Modifier, navController: NavController
                 },
                 colors = NavigationBarItemDefaults.colors(
                     indicatorColor = Color.Transparent,
-                    selectedIconColor = colorPrimary,
-                    unselectedIconColor = colorSecondary
-                )
+                    selectedIconColor = MaterialTheme.colorScheme.primary,
+                    unselectedIconColor = MaterialTheme.colorScheme.secondary,
+
+                    )
             )
         }
     }

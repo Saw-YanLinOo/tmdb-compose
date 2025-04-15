@@ -10,13 +10,14 @@ import com.agb.compose_movieapp.presentation.feature.changelanguage.changeLangua
 import com.agb.compose_movieapp.presentation.feature.discover.discoverScreen
 import com.agb.compose_movieapp.presentation.feature.favorite.favoriteScreen
 import com.agb.compose_movieapp.presentation.feature.login.loginScreen
+import com.agb.compose_movieapp.presentation.feature.movie.movieDetailScreen
 import com.agb.compose_movieapp.presentation.feature.settings.settingScreen
 import com.agb.compose_movieapp.presentation.feature.splashscreen.splashScreen
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun SetUpNavGraph(modifier: Modifier = Modifier, navController: NavHostController) {
-    
+
     Scaffold(
         bottomBar = {
             ButtonNavigation(modifier = modifier, navController = navController)
@@ -37,6 +38,8 @@ fun SetUpNavGraph(modifier: Modifier = Modifier, navController: NavHostControlle
             settingScreen(modifier = modifier, navController = navController)
 
             changeLanguageScreen(modifier = modifier, navController = navController)
+            movieDetailScreen(navController = navController)
+
         }
     }
 }
