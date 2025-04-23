@@ -3,6 +3,8 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.googleDaggerHiltAndroid)
+    alias(libs.plugins.googleDevToolsKsp)
 }
 
 android {
@@ -19,6 +21,8 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         resConfigs("en", "zh", "my")
 
+        buildConfigField("String", "API_KEY", "\"${project.extra["API_KEY"] as String}\"")
+        buildConfigField("String", "BASE_URL", "\"${project.extra["BASE_URL"] as String}\"")
     }
 
     buildTypes {
@@ -39,6 +43,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     androidResources {
         generateLocaleConfig = true
@@ -69,4 +74,28 @@ dependencies {
 
     // Serialization
     implementation(libs.kotlinx.serialization.json)
+
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.gson)
+    implementation(libs.retrofit.kotlinx.serialization.converter)
+    implementation(libs.okhttp)
+
+//     Logging Interceptor
+    implementation(libs.logging.interceptor)
+
+    // Dagger Hilt
+    implementation(libs.hilt.android)
+    implementation(libs.androidx.hilt.navigation.compose)
+    ksp(libs.hilt.android.compiler)
+
+//    Splash Api
+//    implementation(libs.androidx.core.splashscreen)
+
+    // Coroutines
+    implementation(libs.kotlinx.coroutines.android)
+
+    // Coil for image loading
+    implementation(libs.coil.compose)
 }

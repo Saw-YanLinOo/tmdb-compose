@@ -12,7 +12,7 @@ import com.agb.compose_movieapp.R
 
 
 @Composable
-fun RatingStars(modifier: Modifier = Modifier, rating: Float) {
+fun RatingStars(modifier: Modifier = Modifier, rating: Double) {
     Row(
         modifier = Modifier
             .padding(bottom = 4.dp)

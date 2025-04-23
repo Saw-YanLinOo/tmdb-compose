@@ -29,7 +29,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -39,10 +38,10 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
-import com.agb.compose_movieapp.R
 import com.agb.compose_movieapp.domain.model.MovieVO
 import com.agb.compose_movieapp.presentation.feature.discover.components.RatingStars
 import com.agb.compose_movieapp.presentation.navigation.Screens
+import com.agb.compose_movieapp.presentation.utils.networkImagePainter
 import com.agb.compose_movieapp.ui.theme.AppPreviewWrapper
 
 fun NavGraphBuilder.movieDetailScreen(
@@ -61,8 +60,8 @@ fun MovieDetailScreen(modifier: Modifier = Modifier, id: String, navController: 
     val movie = MovieVO(
         id = 1,
         title = "The Wolverine (2013), Official Trailer",
-        posterRes = R.drawable.cinema_image,
-        rating = 8f
+        posterRes = "http://image.tmdb.org/t/p/w400/O7REXWPANWXvX2jhQydHjAq2DV.jpg",
+        rating = 8.0
     )
 
     Scaffold { innerPadding ->
@@ -73,7 +72,7 @@ fun MovieDetailScreen(modifier: Modifier = Modifier, id: String, navController: 
             headerSection(movie = movie, popBack = {
                 navController.popBackStack()
             })
-            
+
             storyLine(movie = movie)
 
             items(20) { index ->
@@ -116,11 +115,11 @@ private fun LazyListScope.headerSection(movie: MovieVO, popBack: () -> Unit = {}
                 .fillMaxWidth()
         ) {
             Image(
-                painter = painterResource(id = movie.posterRes),
+                painter = networkImagePainter(movie.posterRes),
                 contentDescription = movie.title,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
-                    .fillMaxSize()
+                    .fillMaxWidth(),
             )
             Box(
                 modifier = Modifier
@@ -159,7 +158,7 @@ private fun LazyListScope.headerSection(movie: MovieVO, popBack: () -> Unit = {}
                     Spacer(modifier = Modifier.weight(1f))
                     Column(modifier = Modifier.padding(end = 8.dp)) {
                         RatingStars(
-                            rating = movie.rating
+                            rating = movie.rating ?: 0.0,
                         )
 
                         Text(
@@ -178,7 +177,7 @@ private fun LazyListScope.headerSection(movie: MovieVO, popBack: () -> Unit = {}
                         )
                 }
                 Text(
-                    movie.title,
+                    movie.title ?: "",
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
 

@@ -70,64 +70,62 @@ fun NavGraphBuilder.discoverScreen(
 
 @Composable
 fun DiscoverScreen(modifier: Modifier = Modifier, navController: NavController) {
+
+//    val discoverViewModel: DiscoverViewModel = hiltViewModel()
+//    val popularMovieList by discoverViewModel.popularMovies.collectAsState()
+
+    val top = LocalEntryPadding.current.calculateTopPadding()
+    val bottom = LocalEntryPadding.current.calculateBottomPadding()
+
+    val movieList = listOf(
+        MovieVO(
+            id = 1,
+            title = "The Wolverine (2013), Official Trailer",
+            posterRes = "https://image.tmdb.org/t/p/w400/O7REXWPANWXvX2jhQydHjAq2DV.jpg",
+            rating = 6.5,
+        ),
+        MovieVO(
+            id = 2,
+            title = "The Wolverine (2013), Official Trailer",
+            posterRes = "https://image.tmdb.org/t/p/w500/fTrQsdMS2MUw00RnzH0r3JWHhts.jpg",
+            rating = 6.5,
+        ),
+        MovieVO(
+            id = 3,
+            title = "The Wolverine (2013), Official Trailer",
+            posterRes = "https://image.tmdb.org/t/p/w500/fTrQsdMS2MUw00RnzH0r3JWHhts.jpg",
+            rating = 6.5,
+        ),
+    )
+    val tabs = listOf(
+        "Action",
+        "Adventure",
+        "Animation",
+        "Comedy",
+        "Crime",
+        "Documentary",
+        "Drama",
+        "Family",
+        "Fantasy",
+        "History",
+        "Horror",
+        "Music",
+        "Mystery",
+        "Romance"
+    )
+
+    val listState = rememberLazyListState(
+        // Scroll to item index 2, for example
+        initialFirstVisibleItemIndex = 10
+    )
+
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(color = MaterialTheme.colorScheme.background)
     ) {
-
-        val top = LocalEntryPadding.current.calculateTopPadding()
-        val bottom = LocalEntryPadding.current.calculateBottomPadding()
-
-//        val listState = rememberLazyListState(
-//            // Scroll to item index 2, for example
-//            initialFirstVisibleItemIndex = 10
-//        )
-        val movieList = listOf(
-            MovieVO(
-                id = 1,
-                title = "The Wolverine (2013), Official Trailer",
-                posterRes = R.drawable.cinema_image,
-                rating = 6.5f
-            ),
-            MovieVO(
-                id = 2,
-                title = "Avatar: The Way of Water",
-                posterRes = R.drawable.banner_image,
-                rating = 5f
-            ),
-            MovieVO(
-                id = 3,
-                title = "Avatar (2009), Official Trailer",
-                posterRes = R.drawable.cinema_image,
-                rating = 7f
-            ),
-            MovieVO(
-                id = 4,
-                title = "Fast & Furious 7",
-                posterRes = R.drawable.banner_image,
-                rating = 8f
-            ),
-        )
-        val tabs = listOf(
-            "Action",
-            "Adventure",
-            "Animation",
-            "Comedy",
-            "Crime",
-            "Documentary",
-            "Drama",
-            "Family",
-            "Fantasy",
-            "History",
-            "Horror",
-            "Music",
-            "Mystery",
-            "Romance"
-        )
-
         LazyColumn(
-//            state = listState,
+            state = listState,
             contentPadding = PaddingValues(top = 20.dp, bottom = bottom),
             verticalArrangement = Arrangement.spacedBy(20.dp),
             modifier = Modifier
@@ -135,7 +133,7 @@ fun DiscoverScreen(modifier: Modifier = Modifier, navController: NavController) 
         ) {
             headerSection()
             bannerSection(
-                movieList = movieList,
+                movieList = movieList.take(5),
                 onClick = { movie ->
                     navController.navigate(Screens.MovieDetailScreen(movie.id.toString()))
                 }
@@ -158,6 +156,7 @@ private fun LazyListScope.headerSection() {
             fontWeight = FontWeight.Bold,
             modifier = Modifier
                 .padding(horizontal = 20.dp)
+                .padding(top = 20.dp)
         )
         Spacer(modifier = Modifier.height(4.dp))
         Text(
@@ -289,56 +288,56 @@ private fun LazyListScope.genresSection(
     movieList: List<MovieVO> = emptyList()
 ) {
     item {
-        Column {
-            var selectedTabIndex by remember { mutableIntStateOf(0) }
+        var selectedTabIndex by remember { mutableIntStateOf(0) }
 
-            ScrollableTabRow(
-                selectedTabIndex = selectedTabIndex,
-                edgePadding = 16.dp,
-                contentColor = Color.Gray,
-                containerColor = MaterialTheme.colorScheme.background,
-                divider = { HorizontalDivider(color = Color.Transparent) },
-                indicator = { tabPositions ->
-                    TabRowDefaults.SecondaryIndicator(
-                        color = Color.Yellow,
-                        modifier = Modifier
-                            .tabIndicatorOffset(tabPositions[selectedTabIndex])
-                            .fillMaxWidth()
-                    )
-                }
-            ) {
-                tabs.forEachIndexed { index, tab ->
-                    Tab(
-                        selected = selectedTabIndex == index,
-                        onClick = { selectedTabIndex = index },
-                        modifier = Modifier.padding(8.dp),
-                        content = {
-                            Text(
-                                text = tab,
-                                style = MaterialTheme.typography.bodyLarge,
-                                fontWeight = FontWeight.Bold,
-                                modifier = Modifier
-                                    .padding(8.dp),
-
-                                )
-                        }
-                    )
-                }
+        ScrollableTabRow(
+            modifier = Modifier.height(16.dp),
+            selectedTabIndex = selectedTabIndex,
+            edgePadding = 16.dp,
+            contentColor = Color.Gray,
+            containerColor = MaterialTheme.colorScheme.background,
+            divider = { HorizontalDivider(color = Color.Transparent) },
+            indicator = { tabPositions ->
+                TabRowDefaults.SecondaryIndicator(
+                    color = Color.Yellow,
+                    modifier = Modifier
+                        .tabIndicatorOffset(tabPositions[selectedTabIndex])
+                        .fillMaxWidth()
+                )
             }
-            LazyRow(
-                horizontalArrangement = Arrangement.spacedBy(16.dp),
-                contentPadding = PaddingValues(horizontal = 20.dp),
-                modifier = Modifier
-                    .padding(top = 8.dp)
-
-            ) {
-                movieList.forEach { movie ->
-                    item {
-                        MovieCard(movie = movie, onClick = {})
+        ) {
+            tabs.forEachIndexed { index, tab ->
+                Tab(
+                    selected = selectedTabIndex == index,
+                    onClick = { selectedTabIndex = index },
+                    modifier = Modifier.padding(8.dp),
+                    content = {
+                        Text(
+                            text = tab,
+                            style = MaterialTheme.typography.bodyLarge,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier
+                                .padding(4.dp),
+                            )
                     }
+                )
+            }
+        }
+
+        LazyRow(
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            contentPadding = PaddingValues(horizontal = 20.dp),
+            modifier = Modifier
+                .padding(top = 8.dp)
+
+        ) {
+            movieList.forEach { movie ->
+                item {
+                    MovieCard(movie = movie, onClick = {})
                 }
             }
         }
+
     }
 
 }

@@ -61,7 +61,7 @@ fun ButtonNavigation(modifier: Modifier = Modifier, navController: NavController
                 elevation = 12.dp,
                 spotColor = MaterialTheme.colorScheme.background,
             )
-            .height(86.dp),
+            .height(96.dp),
     ) {
         items.forEachIndexed { index, item ->
             NavigationBarItem(

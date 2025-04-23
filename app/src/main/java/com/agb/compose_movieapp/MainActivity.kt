@@ -12,7 +12,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.agb.compose_movieapp.presentation.navigation.SetUpNavGraph
 import com.agb.compose_movieapp.ui.theme.ComposemovieappTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
 
@@ -33,18 +35,13 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     ComposemovieappTheme {
-        Greeting("Android")
+        SetUpNavGraph(
+            modifier = Modifier.fillMaxSize(),
+            navController = rememberNavController(),
+        )
     }
 }

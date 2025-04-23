@@ -32,12 +32,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.agb.compose_movieapp.domain.model.MovieVO
+import com.agb.compose_movieapp.presentation.utils.networkImagePainter
 
 
 @Composable
@@ -63,11 +64,11 @@ fun ImageCarousel(
                     .clickable { onClick(imageList[page]) }
             ) {
                 Image(
-                    painter = painterResource(id = imageList[page].posterRes),
-                    contentDescription = null,
+                    painter = networkImagePainter(imageList[page].posterRes),
+                    contentDescription = "poster ${imageList[page].title}",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
-                        .fillMaxSize(),
+                        .fillMaxWidth(),
                 )
 
                 Box(
@@ -87,7 +88,7 @@ fun ImageCarousel(
                         )
                 )
                 Text(
-                    text = imageList[page].title,
+                    text = imageList[page].title ?: "",
                     style = MaterialTheme.typography.headlineSmall,
                     fontWeight = FontWeight.ExtraBold,
                     letterSpacing = 2.sp,
@@ -117,8 +118,9 @@ fun ImageCarousel(
 
         DotsIndicator(
             modifier = Modifier
-                .padding(horizontal = 4.dp, vertical = 4.dp)
-                .fillMaxWidth(),
+                .height(28.dp)
+                .fillMaxWidth()
+            .padding(horizontal = 4.dp, vertical = 4.dp),
             totalDots = imageList.size,
             selectedIndex = if (isDragged) pagerState.currentPage else pagerState.targetPage,
             dotSize = 12.dp
@@ -154,4 +156,21 @@ fun DotsIndicator(
             }
         }
     }
+}
+
+@Preview
+@Composable
+fun ImageCarouselPreview() {
+    val movie = MovieVO(
+        id = 1,
+        title = "Avatar: The Way of Water",
+        posterRes = "http://image.tmdb.org/t/p/w400/O7REXWPANWXvX2jhQydHjAq2DV.jpg",
+        rating = 5.0,
+    )
+
+    ImageCarousel(
+        imageList = listOf(movie, movie, movie, movie, movie),
+        pagerState = rememberPagerState(initialPage = 0) { 5 },
+        onClick = {}
+    )
 }
